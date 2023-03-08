@@ -1,0 +1,112 @@
+Program "Q10"
+
+READ *, A, Q10
+
+  DO A=LN(Q10)/10
+
+  PRINT *, A
+
+READ *, MAT, BD, STN, SOC
+
+  DO Q10=9.353*EXP(-0.023*MAT-0.622*BD-0.182*STN-0.009*SOC/STN)*(SOC/(SOC+0.567))
+
+  END DO
+
+  PRINT *, Q10
+
+Program "R0"
+
+  READ *, R0
+
+  DO R0=4.357*EXP(-1.002*Q10)
+
+  END DO
+
+  PRINT *, R0
+
+Program "LAI"
+
+Real, Overwintering crop growing season
+
+READ *, LAI, NGSC
+
+  IF (NGSC< 0.815) then
+
+    LAI=0.618*EXP(2.564*NGSC)
+
+  ELSE
+
+  IF (NGSC > 0.815) or (NGSC=0.815) then
+
+    LAI=12116*EXP(-9.279*NGSC)
+
+  END IF
+
+    PRINT *, f(LAI)
+
+Real, Summer growing season
+
+READ *, LAI, NGSC
+
+  IF (NGSC < 0.567) then
+
+    LAI=0.504*EXP(4.905*NGSC)
+
+  ELSE
+
+  IF (NGSC > 0.567) or (NGSC = 0.567) then
+
+    LAI=69.787*EXP(-3.930*NGSC)
+
+  END IF
+
+    PRINT *, LAI
+
+READ *, f(LAI)
+
+  DO f(LAI)=(LAI/(LAI+0.496))
+
+     PRINT *, f(LAI)
+
+Program "f(SOC)"
+
+READ *, f(SOC), SOC
+
+  DO f(SOC)=1.876*(SOC/(SOC+1.726))
+
+    PRINT *, f(SOC)
+
+Program "Rs"
+
+READ *, Rs, ST, SM
+    
+  IF (SM < 0.01) then
+
+    Rs=0
+
+  ELSE
+  
+  IF (SM = 0.01) or (SM = 0.52) than
+
+    Rs=R0*EXP(A*ST+0.093*SM)*(LAI/(LAI+0.496))*(1.876*SOC/(SOC+1.726))
+
+  ELSE
+
+  IF (SM > 0.01) and (SM < 0.52) than
+
+    Rs=R0*EXP(A*ST+0.093*SM)*(LAI/(LAI+0.496))*(1.876*SOC/(SOC+1.726))
+
+  ELSE
+  
+  IF (SM > 0.52) than
+
+    Rs=R0*EXP(A*ST-0.093*SM)*(LAI/(LAI+0.496))*(1.876*SOC/(SOC+1.726))
+
+  END IF
+
+    PRINT *, Rs
+
+
+
+
+
